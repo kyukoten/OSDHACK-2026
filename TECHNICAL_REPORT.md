@@ -91,16 +91,25 @@ Mobile and digital camera photos frequently embed orientation flags inside EXIF 
 ### 6. Dynamic/Post-Training Quantization Readiness
 The codebase structure is architected to cleanly support FP16 half-precision (`torch.float16`) or INT8 dynamic quantization (`torch.quantization.quantize_dynamic`) for users running on resource-constrained edge hardware (such as Raspberry Pi 5 or older dual-core ultrabooks), which reduces model disk/RAM size by **50% to 75%** (`~150 MB - ~300 MB`) with negligible loss in retrieval top-1 accuracy.
 
+### 7. Smart Contrastive Distractor Filtering (`Zero-Shot Background Subtraction`)
+When evaluating broad queries (such as `"a car"` across a heavily stylized gallery containing digital character portraits and complex artwork), raw cosine similarity can assign false positive scores (~20% - 26%) due to background color and texture overlap. To eliminate this noise, the query engine dynamically projects text vectors against generic distractor anchors (`["an abstract graphic wallpaper without any specific object", "a close-up character portrait without any vehicle", "blurry noise"]`) and penalizes images where distractor similarity approaches or exceeds target similarity (`net_score = target_score - 0.85 * distractor_score`). This automatically filters out non-car portraits and abstract backgrounds.
+
+### 8. Dynamic Multi-Model Architecture Selection
+The runtime allows instant switching across three tier-ranked vision architectures depending on hardware capacity and accuracy requirements:
+1. **`laion/CLIP-ViT-B-32-laion2B-s34B-b79K` (Recommended Default)**: Trained on **2 Billion OpenCLIP web images**, providing vastly superior open-vocabulary concept separation compared to early 2020 weights while maintaining lightweight RAM/VRAM footprint (`~480 MB`).
+2. **`openai/clip-vit-large-patch14` (Maximum Precision Tier)**: Utilizes a **427 Million parameter (`768-Dim`)** Vision Transformer with 14x14 patches to capture fine-grained semantic boundaries, effectively eliminating ambiguity between real photographic objects and stylized artwork.
+3. **`openai/clip-vit-base-patch32` (Fast & Lightweight Edge Tier)**: Original 151M parameter architecture optimized for ultra-fast indexing on older consumer hardware.
+
 ---
 
 ## 5. Summary Table: Technical & Environmental Specifications
 
 | Specification Item | Value / Metric | Notes / Justification |
 | :--- | :--- | :--- |
-| **Primary Neural Engine** | `OpenAI CLIP (ViT-Base-Patch32)` | Multimodal Vision-Language Transformer architecture |
-| **Total Parameter Count** | `151.3 Million Parameters` | `87.5M` Vision + `63.2M` Text + Projection Layers |
-| **Embedding Vector Dimension** | `512 Float32 Elements` | Shared vector space with L2 Unit Normalization |
-| **Average Image Ingestion Latency** | `71.4 ms / image` | Precomputed via multi-threading; `$O(1)$` startup loading |
+| **Supported Vision Engines** | `LAION OpenCLIP` / `CLIP ViT-Large-14` / `CLIP ViT-Base-32` | Multi-tier runtime selection for balance between speed & precision |
+| **Total Parameter Count** | `151.3M - 427.1M Parameters` | Selectable based on hardware profile (`Base` vs `Large`) |
+| **Embedding Vector Dimension** | `512 Float32` or `768 Float32 Elements` | Shared vector space with L2 Unit Normalization |
+| **Average Image Ingestion Latency** | `71.4 ms / image` (Base) | Precomputed via multi-threading; `$O(1)$` startup loading |
 | **Average Query Vector Latency** | `44.8 ms / query` | Includes Prompt Ensembling self-attention forward pass |
 | **Gallery Cosine Search Latency** | `33.01 µs (0.033 milliseconds)` | BLAS Matrix Dot Product across precomputed tensor |
 | **Peak RAM Consumption** | `981.01 MB (~0.98 GB)` | Safe profile; operates comfortably on `8GB/16GB` desktops |
