@@ -14,8 +14,6 @@ An open-source, offline-first native desktop search assistant engineered for **O
 We have prepared comprehensive, engineering-grade documentation covering every mandatory and recommended evaluation criteria requested by the OSDHack 2026 committee:
 
 | Submission Requirement | Status | Document Link & Overview |
-| :--- | :---: | :--- |
-| **Demo Video Guide** *(Mandatory)* | ✅ Included | **[`DEMO_VIDEO_GUIDE.md`](./DEMO_VIDEO_GUIDE.md)** — Step-by-step 2-3 minute video storyboard, voiceover script, and recording checklist. |
 | **System Architecture** *(Recommended)* | ✅ Included | **[`ARCHITECTURE.md`](./ARCHITECTURE.md)** — Mermaid system diagrams, Vision/Text Transformer pipeline, multi-threaded I/O flow, and key design decisions. |
 | **Technical Report** *(Recommended)* | ✅ Included | **[`TECHNICAL_REPORT.md`](./TECHNICAL_REPORT.md)** — Live empirical benchmarks, parameter counts (`~151.3M`), latency (`16.9 µs` search), and sub-1GB peak RAM profiles. |
 | **Local AI Verification** *(Recommended)*| ✅ Included | **[`LOCAL_AI_VERIFICATION.md`](./LOCAL_AI_VERIFICATION.md)** — Air-gapped guarantees, offline execution matrix, and step-by-step verification protocols. |
@@ -131,7 +129,6 @@ OSDHACK-2026/
 ├── EVALUATION.md               # Retrieval accuracy tables, baseline comparison & failure cases
 ├── PRIVACY_SAFETY.md           # Data handling policies, read-only permissions & risk analysis
 ├── ATTRIBUTION.md              # Open-source model, library, dataset & license attributions
-├── DEMO_VIDEO_GUIDE.md         # 2-3 minute video storyboard, voiceover script & recording tips
 └── sample_images/              # Directory containing user photos and .photo_index.pt
 ```
 

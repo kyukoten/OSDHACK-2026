@@ -4,4 +4,10 @@ __pycache__/
 .env
 .DS_Store
 *.pt
+*.mp3
+*.wav
+*.mp4
 *TEMP_MPY*
+seg_*.png
+DEMO_VIDEO_GUIDE.md
+generate_demo_video.py
