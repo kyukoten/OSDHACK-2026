@@ -3,7 +3,6 @@
 [![OSDHack 2026 Submission](https://img.shields.io/badge/OSDHack-2026_Submission-blueviolet?style=for-the-badge)](https://github.com/kyukoten/OSDHACK-2026)
 [![Execution: 100% On-Device](https://img.shields.io/badge/Execution-100%25_Local_AI-2ea44f?style=for-the-badge)](./LOCAL_AI_VERIFICATION.md)
 [![Model: CLIP ViT--B/32](https://img.shields.io/badge/Model-OpenAI_CLIP_ViT--B%2F32-009688?style=for-the-badge)](./TECHNICAL_REPORT.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./ATTRIBUTION.md)
 
 An open-source, offline-first native desktop search assistant engineered for **OSDHack 2026**. This application empowers users to search through personal image directories using natural language semantic queries (e.g., *"a dog playing in the park"*, *"sunset by the beach"*, *"red sports car"*)—**without transmitting a single pixel, file name, or search query to external cloud servers.**
 
@@ -14,6 +13,7 @@ An open-source, offline-first native desktop search assistant engineered for **O
 We have prepared comprehensive, engineering-grade documentation covering every mandatory and recommended evaluation criteria requested by the OSDHack 2026 committee:
 
 | Submission Requirement | Status | Document Link & Overview |
+| :--- | :---: | :--- |
 | **System Architecture** *(Recommended)* | ✅ Included | **[`ARCHITECTURE.md`](./ARCHITECTURE.md)** — Mermaid system diagrams, Vision/Text Transformer pipeline, multi-threaded I/O flow, and key design decisions. |
 | **Technical Report** *(Recommended)* | ✅ Included | **[`TECHNICAL_REPORT.md`](./TECHNICAL_REPORT.md)** — Live empirical benchmarks, parameter counts (`~151.3M`), latency (`16.9 µs` search), and sub-1GB peak RAM profiles. |
 | **Local AI Verification** *(Recommended)*| ✅ Included | **[`LOCAL_AI_VERIFICATION.md`](./LOCAL_AI_VERIFICATION.md)** — Air-gapped guarantees, offline execution matrix, and step-by-step verification protocols. |
