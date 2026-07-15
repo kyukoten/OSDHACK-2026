@@ -1,5 +1,9 @@
 import os
+import sys
 import urllib.request
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 # Define diverse test images from public, un-blocked URLs
 test_images = {
@@ -22,4 +26,4 @@ for filename, url in test_images.items():
     except Exception as e:
         print(f"Failed to download {filename}: {e}")
 
-print(f"\n✅ Ready! 5 images saved inside '{target_dir}' folder.")
+print(f"\n[+] Ready! 5 images saved inside '{target_dir}' folder.")

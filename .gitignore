@@ -3,3 +3,8 @@ __pycache__/
 *.pyc
 .env
 .DS_Store
+*.pt
+seg_*.mp3
+seg_*.png
+seg_*.wav
+*TEMP_MPY*
