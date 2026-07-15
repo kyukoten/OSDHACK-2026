@@ -26,10 +26,11 @@ We have prepared comprehensive, engineering-grade documentation covering every m
 ## ⚡ Key Features
 
 * 🔒 **100% Air-Gapped & Offline Execution:** All neural network inference executes locally using your machine's CPU/GPU/NPU. Once initialized, the app works without any internet connection.
-* 🧠 **Multimodal Semantic Understanding:** Powered by `OpenAI CLIP (ViT-Base-Patch32)`, mapping text prompts and raster images into a shared `512-dimensional` vector space.
-* ⚡ **Instant Precomputed Indexing (`.photo_index.pt`):** Multi-threaded worker pools (`ThreadPoolExecutor`) ingest photos in parallel, serializing L2-normalized feature tensors directly to disk for $O(1)$ instant startup loading.
-* 🎛️ **Interactive Strictness Threshold Slider:** Dynamically filter top-ranked results (`15% - 50%`) to eliminate low-confidence noise and customize precision versus recall in real time.
-* 💅 **Native App Polish:** Custom CSS injection transforms standard Streamlit elements into a sleek desktop gallery with card hover micro-animations and confidence badges.
+* 🌟 **Dynamic Multi-Model Engine Selection:** Seamlessly switch between three state-of-the-art vision architectures right from the settings tab: **LAION OpenCLIP (`CLIP-ViT-B-32-laion2B`)** trained on 2B images for superior open-vocabulary accuracy, **Ultra-Precision (`CLIP-ViT-Large-Patch14`)** (`427M params`, 768-dim) for fine-grained boundary separation, and **OpenAI Base (`ViT-Base-32`)** for fast edge devices.
+* 🛡️ **Smart Contrastive Distractor Subtraction:** Automatically projects search queries against negative background anchors (`"abstract wallpaper"`, `"character closeup without vehicle"`, `"blurry noise"`) to penalize and eliminate false positives and complex background distractors in real time.
+* 🎯 **Multi-Crop Feature Fusion & Prompt Ensembling:** Combines `70% full-scene + 30% center zoom` visual embeddings with zero-shot natural photographic prompt expansion (`"a clear photograph of {query}"`) to boost retrieval top-1 precision.
+* ⚡ **Instant Precomputed Caching (`.photo_index_{model}.pt`):** Multi-threaded worker pools (`ThreadPoolExecutor`) ingest photos in parallel, serializing L2-normalized feature tensors directly to disk per model for $O(1)$ instant startup loading.
+* 🎛️ **Interactive Strictness Slider & Sorting:** Dynamically filter top-ranked results, sort by highest match or file name, and view live image resolution badges (`📐 1920x1080`) directly on sleek glassmorphism cards.
 
 ---
 
